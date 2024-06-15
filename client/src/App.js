@@ -89,14 +89,17 @@ function App() {
           const barQuestionAndAnswer = writerResponseJson.barQuestion ? writerResponseJson.barQuestion.split(`
           ANSWER HERE:
           `) : ERROR_MESSAGE;
-          barQuestion = barQuestionAndAnswer[0];
-          setBarQuestion(barQuestion);
+          console.log('Bar Question and Answer: ', barQuestionAndAnswer);
+          setBarQuestion(barQuestionAndAnswer[0]);
         } else {
           setBarQuestion(ERROR_MESSAGE);
         }
       } catch (error) {
         setBarQuestion(ERROR_MESSAGE);
       }
+
+      // reset the request pending status
+      setRequestPending(false);
     }
   }
 
@@ -139,10 +142,8 @@ function App() {
         onClick={ promptWriterForQuestion }>
           Fire away!
       </button>
-      { !requestPending && barQuestion && <button className='copyButton' onClick={copyToClipboard}>Copy</button> }
       { barQuestion && <div className='barQuestion' dangerouslySetInnerHTML={{ __html: renderTextWithMarkdown(barQuestion) }} /> }
       { requestPending && <Mask className='funnel'/>}
-
     </div>
   );
 }
