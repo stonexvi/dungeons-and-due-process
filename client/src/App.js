@@ -117,7 +117,6 @@ function App() {
             name='questionType'
             value={TOGGLE_OPTIONS.MULTIPLE_CHOICE}
             onChange={handleToggleOption}
-            checked
           />
           <label htmlFor='multipleChoiceOption'>
           <b>Multiple Choice</b>
