@@ -1,0 +1,15 @@
+{
+  "name": "infinity-period",
+  "version": "1.2.0",
+  "description": "Infinity Period Server",
+  "main": "invoke.js",
+  "scripts": {
+    "invoke": "node invoke.mjs",
+    "predeploy": "zip -r deployments/infinityth-period-v$npm_package_version.zip . -x deployments/*"
+  },
+  "author": "Brendan Stone",
+  "license": "ISC",
+  "dependencies": {
+    "openai": "^4.47.2"
+  }
+}

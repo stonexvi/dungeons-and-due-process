@@ -1,0 +1,6 @@
+# Mac OS X Finder
+.DS_Store
+
+# NodeJS
+node_modules/
+build/
