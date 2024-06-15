@@ -17,7 +17,7 @@ const TOGGLE_OPTIONS = {
 /**
  * This is the URL for the dnd bar writer
  */
-const DND_BAR_WRITER_URL = 'https://6bvlhqo2f34mfjxuq6mevirxoq0eggan.lambda-url.us-east-1.on.aws/';
+const DND_BAR_WRITER_URL = 'https://tuzftpau5kvve24s4oueo57dhe0esuls.lambda-url.us-east-1.on.aws/';
 
 function renderTextWithMarkdown(text) {
   // Replace newline characters with <br /> tags

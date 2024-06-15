@@ -34,7 +34,7 @@ export async function handle(event) {
     }
   }
   
-  const questionType = requestBody.questionType ?? 'multiple-choice';
+  const questionType = requestBody.questionType ?? 'MULTIPLE_CHOICE';
 
   const chatCompletion = await openai.chat.completions.create({
     messages: [
