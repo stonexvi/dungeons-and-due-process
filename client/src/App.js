@@ -24,7 +24,7 @@ function renderTextWithMarkdown(text) {
   let html = text.replace(/\n/g, '<br />');
 
   // Replace **text** with <b>text</b>
-  html = html.replace(/\**(.*?)\**/g, '<b>$1</b>');
+  html = html.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
 
   // Replace **text** with <b>text</b>
   html = html.replace(/\*(.*?)\*/g, '<b>$1</b>');
@@ -39,16 +39,13 @@ function renderTextWithMarkdown(text) {
 
 function App() {
   const [barQuestion, setBarQuestion] = useState('');
+  const [barAnswer, setBarAnswer] = useState('');
+  const [answerRevealed, setAnswerRevealed] = useState(false);
   const [requestPending, setRequestPending] = useState(false);
   const [questionType, setQuestionType] = useState(TOGGLE_OPTIONS.MULTIPLE_CHOICE);
 
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(barQuestion);
-      console.log('Copied episode!');
-    } catch (err) {
-      console.log('Failed to copy text');
-    }
+  const revealAnswer = async () => {
+    setAnswerRevealed(true);
   };
 
   const handleToggleOption = (event) => {
@@ -63,8 +60,10 @@ function App() {
       console.log('Existing request pending, try again later.');
     } else {
       try {
-        // reset the current episondeScript
-        setBarQuestion('')
+        // reset the current question and answer
+        setBarQuestion('');
+        setBarAnswer('');
+        setAnswerRevealed(false);
 
         // establish that a request is pending
         setRequestPending(true);
@@ -86,16 +85,20 @@ function App() {
         console.log('Writer Response JSON: ', writerResponseJson);
   
         if (writerResponseJson.statusCode === 200) {
-          const barQuestionAndAnswer = writerResponseJson.barQuestion ? writerResponseJson.barQuestion.split(`
-          ANSWER HERE:
-          `) : ERROR_MESSAGE;
+          const barQuestionAndAnswer = writerResponseJson.barQuestion ? writerResponseJson.barQuestion.split('ANSWER HERE:') : [ ERROR_MESSAGE ];  
           console.log('Bar Question and Answer: ', barQuestionAndAnswer);
           setBarQuestion(barQuestionAndAnswer[0]);
+
+          if (barQuestionAndAnswer.length > 1) {
+            setBarAnswer(barQuestionAndAnswer[1].trim());
+          }
         } else {
           setBarQuestion(ERROR_MESSAGE);
+          setBarAnswer('');
         }
       } catch (error) {
         setBarQuestion(ERROR_MESSAGE);
+        setBarAnswer('');
       }
 
       // reset the request pending status
@@ -143,7 +146,9 @@ function App() {
           Fire away!
       </button>
       { barQuestion && <div className='barQuestion' dangerouslySetInnerHTML={{ __html: renderTextWithMarkdown(barQuestion) }} /> }
-      { requestPending && <Mask className='funnel'/>}
+      { requestPending && <Mask className='funnel' />}
+      { barQuestion && barAnswer && <button className='showAnswer' onClick={ revealAnswer }>Show Answer</button> }
+      { barQuestion && barAnswer && answerRevealed && <div className='barQuestion' dangerouslySetInnerHTML={{ __html: renderTextWithMarkdown(barAnswer) }} /> }
     </div>
   );
 }
