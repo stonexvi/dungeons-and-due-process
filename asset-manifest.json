@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.68ca2aba.css",
+    "main.css": "/static/css/main.6ff74482.css",
     "main.js": "/static/js/main.1fef68b6.js",
     "static/js/787.82381ff5.chunk.js": "/static/js/787.82381ff5.chunk.js",
     "static/media/DungeonsAndDueProcessLogo.png": "/static/media/DungeonsAndDueProcessLogo.972f0079266fdc4f6892.png",
     "static/media/mask.svg": "/static/media/mask.23970fced3c30b7c8529bd9f66fb05f3.svg",
     "index.html": "/index.html",
-    "main.68ca2aba.css.map": "/static/css/main.68ca2aba.css.map",
+    "main.6ff74482.css.map": "/static/css/main.6ff74482.css.map",
     "main.1fef68b6.js.map": "/static/js/main.1fef68b6.js.map",
     "787.82381ff5.chunk.js.map": "/static/js/787.82381ff5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.68ca2aba.css",
+    "static/css/main.6ff74482.css",
     "static/js/main.1fef68b6.js"
   ]
 }
